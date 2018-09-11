@@ -15,6 +15,8 @@ namespace TokenIcer
       public MainForm()
       {
          InitializeComponent();
+
+         menuStrip1.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
       }
    }
 }
