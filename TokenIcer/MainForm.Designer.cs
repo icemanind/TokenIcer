@@ -35,6 +35,7 @@
             this.loadGrammarAndTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scintilla1 = new ScintillaNET.Scintilla();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,12 +94,20 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.exitToolStripMenuItem.Text = "E&xit...";
             // 
+            // scintilla1
+            // 
+            this.scintilla1.Location = new System.Drawing.Point(265, 137);
+            this.scintilla1.Name = "scintilla1";
+            this.scintilla1.Size = new System.Drawing.Size(502, 386);
+            this.scintilla1.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.ClientSize = new System.Drawing.Size(1016, 697);
+            this.Controls.Add(this.scintilla1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
@@ -121,6 +130,7 @@
       private System.Windows.Forms.ToolStripMenuItem loadGrammarAndTestToolStripMenuItem;
       private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
       private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-   }
+        private ScintillaNET.Scintilla scintilla1;
+    }
 }
 
