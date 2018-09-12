@@ -1,0 +1,27 @@
+﻿#
+# This grammar describes a very simple C
+# interpreter.
+# After hitting the "Test Grammar" button,
+# you will see how TokenIcer will tokenize
+# the example C program into tokens.
+#
+"\#include" Include
+"<.*?>" AngleString
+"\".*?\"" String
+"[ \t]+" Whitespace
+"[\r\n]+" Newline
+"[a-zA-Z_][a-zA-Z0-9_]*" Identifier
+"\/\*+((([^\*])+)|([\*]+(?!\/)))[*]+\/" Comment
+"\(" Lparen 
+"\)" Rparen
+"\{" OpenBrace
+"\}" CloseBrace
+"\;" Semicolon~#include <stdio.h>
+#include "mytest.h"
+/* This is a C comment
+   It may span many lines! 
+ */
+main()
+{
+    printf("Hello World!\n");
+}

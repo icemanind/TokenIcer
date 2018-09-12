@@ -1,0 +1,41 @@
+﻿#
+# This grammar describes a very simple BASIC
+# interpreter.
+# After hitting the "Test Grammar" button,
+# you will see how TokenIcer will tokenize
+# the example BASIC program into tokens.
+#
+"[Ll][Ee][Tt]" Let                   # Let keyword
+"[Pp][Rr][Ii][Nn][Tt]" Print         # Print keyword
+"[Cc][Ll][Ss]" Cls                   # Cls keyword
+"[Rr][Ee][Mm][^\r\n]*" Rem           # Rem keyword
+"[Ee][Nn][Dd]" End                   # End keyword
+"[Gg][Oo][Tt][Oo]" Goto              # Goto keyword
+"[Ff][Oo][Rr]" For                   # For keyword
+"[Ss][Tt][Ee][Pp]" Step              # Step keyword
+"[Nn][Ee][Xx][Tt]" Next              # Next keyword
+"[Tt][Oo]" To                        # To keyword
+"\:" Colon                           # Colon (:)
+"=" Equals                           # Equals (=)
+"\".*?\"" String                     # Strings
+"[a-zA-Z_][a-zA-Z0-9_]*" Identifier  # Identifiers
+"[ \t]+" Whitespace                  # Whitespace
+"[\r\n]+" Newline                    # Newline
+"[0-9]?\.+[0-9]+" Float              # Floating-point Number
+"[0-9]+" Integer                     # Integers
+"'.*" Comment                        # Apostrophe Comment
+"\(" Lparen                          # Left Parenthesis
+"\)" Rparen                          # Right Parenthesis
+"\*" Asterisk                        # Asterisk
+"\/" Slash                           # Slash
+"\+" Plus                            # Plus sign
+"\-" Minus                           # Minus sign~' This is an example program!
+10 CLS
+20 PRINT "Hello" : PRINT " World!"
+30 LET X = 5
+40 Y = X * 2 + 3.5
+50 PRINT Y
+60 FOR Z = 50 TO 1 STEP - 1
+70 PRINT "Z = " + Z
+80 NEXT Z
+90 END

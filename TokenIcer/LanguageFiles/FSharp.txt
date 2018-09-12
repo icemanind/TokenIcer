@@ -1,0 +1,85 @@
+﻿module TokenParser
+
+#light
+open System
+open System.Collections.Generic
+open System.Text.RegularExpressions
+
+type Tokens =
+    | Undefined = 0
+\$$$\
+
+type Token = {TokenName : Tokens; TokenValue : string}
+
+type PeekToken = {TokenIndex : int; TokenPeek : Token}
+
+type TokenParser() =
+    let _tokens : Dictionary<Tokens, string> = new Dictionary<Tokens, string>()
+    let _regExMatchCollection : Dictionary<Tokens, MatchCollection> = new Dictionary<Tokens, MatchCollection>()
+    let mutable _index = 0
+    let mutable _inputString : string = String.Empty
+
+\$$$\
+
+    member this.InputString 
+        with set(value) = 
+            _inputString <- value
+            this.PrepareRegex()
+    
+    member this.PrepareRegex() = 
+        _regExMatchCollection.Clear()
+        _tokens |> Seq.iter (fun (KeyValue(k, v)) -> _regExMatchCollection.Add(k, Regex.Matches(_inputString, v)))
+
+    member this.ResetParser() =
+        let _index = 0
+        let _inputString = String.Empty
+        _regExMatchCollection.Clear()
+
+    member this.GetToken() : Token option  =
+        if _index >= _inputString.Length then None
+        else 
+            let mutable res : Token option = None                    
+            let mutable breakLoop = false
+            for key in _regExMatchCollection.Keys do
+                if key <> Tokens.Undefined then
+                    for amatch in _regExMatchCollection.[key] do
+                        if breakLoop = false then
+                            if amatch.Index = _index then
+                                if res = None then
+                                    _index <- _index + amatch.Length
+                                    res <- Some({TokenName = key; TokenValue = amatch.Value})
+                            if amatch.Index > _index then
+                                breakLoop <- true
+                breakLoop <- false
+
+            if res = None then
+                _index <- _index + 1
+                res <- Some({TokenName = Tokens.Undefined; TokenValue = String.Empty})
+            res
+
+    member this.Peek() =
+        this.Peek({TokenIndex = _index; TokenPeek = {TokenName = Tokens.Undefined; TokenValue = String.Empty}})
+    
+    member this.Peek(peekToken : PeekToken) : PeekToken option =
+        let oldIndex = _index
+        _index <- peekToken.TokenIndex
+        
+        if _index >= _inputString.Length then
+            _index <- oldIndex
+            None
+        else
+            let mutable res : PeekToken option = None
+            for pair in _tokens do
+                if res = None && pair.Key <> Tokens.Undefined then 
+                    let r = new Regex(pair.Value)
+                    let m = r.Match(_inputString, _index)
+
+                    if m.Success && m.Index = _index then
+                        _index <- _index + m.Length
+                        res <- Some({TokenIndex = _index; TokenPeek = {TokenName = pair.Key; TokenValue = m.Value}})
+                        _index <- oldIndex
+
+            if res = None then
+                res <- Some({TokenIndex = _index + 1; TokenPeek = {TokenName = Tokens.Undefined; TokenValue = String.Empty}})
+                _index <- oldIndex
+            res
