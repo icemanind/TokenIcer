@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ScintillaNET;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
+using Newtonsoft.Json;
+using ScintillaNET;
 
 namespace TokenIcer
 {
     public partial class MainForm : Form
     {
+        #region Fields
         private Processor _processor;
+        #endregion
 
+        #region Constructor
         public MainForm()
         {
             InitializeComponent();
@@ -44,12 +43,9 @@ namespace TokenIcer
             txtOutput.Margins.Capacity = 0;
             txtOutput.StyleClearAll();
         }
+        #endregion
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            _processor = new Processor();
-        }
-
+        #region Private Methods
         private void UpdateTree(Token token)
         {
             var valueNode = new TreeNode("\"" + token.TokenValue + "\"");
@@ -72,6 +68,45 @@ namespace TokenIcer
 
                 token = _processor.GetToken();
             }
+        }
+
+        private string GetExampleCode(string name)
+        {
+            try
+            {
+                StreamReader textStreamReader;
+                Assembly assembly = Assembly.GetExecutingAssembly();
+
+                try
+                {
+                    textStreamReader =
+                        new StreamReader(assembly.GetManifestResourceStream(name));
+                }
+                catch
+                {
+                    return "";
+                }
+
+                string retval = textStreamReader.ReadToEnd();
+                textStreamReader.Close();
+                return retval;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        private void SaveFile(string filename, TokenIcerModel model)
+        {
+            File.WriteAllText(filename, JsonConvert.SerializeObject(model));
+        }
+        #endregion
+
+        #region Event Handlers
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            _processor = new Processor();
         }
 
         private void BtnTestGrammar_Click(object sender, EventArgs e)
@@ -243,31 +278,42 @@ namespace TokenIcer
             txtInputTest.Text = test;
         }
 
-        private string GetExampleCode(string name)
+        private void SaveInputGrammarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var model = new TokenIcerModel
             {
-                StreamReader textStreamReader;
-                Assembly assembly = Assembly.GetExecutingAssembly();
+                InputGrammar = txtInputGrammar.Text,
+                InputTest = txtInputTest.Text,
+                TokenicerVersion = $"{fvi.FileVersion}"
+            };
 
-                try
-                {
-                    textStreamReader =
-                        new StreamReader(assembly.GetManifestResourceStream(name));
-                }
-                catch
-                {
-                    return "";
-                }
+            DialogResult dr = saveFileDialog1.ShowDialog();
 
-                string retval = textStreamReader.ReadToEnd();
-                textStreamReader.Close();
-                return retval;
-            }
-            catch
+            if (dr == DialogResult.Cancel)
             {
-                return "";
+                return;
             }
+
+            SaveFile(saveFileDialog1.FileName, model);
         }
+
+        private void LoadGrammarAndTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = openFileDialog1.ShowDialog();
+
+            if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            string json = File.ReadAllText(openFileDialog1.FileName);
+            TokenIcerModel model = JsonConvert.DeserializeObject<TokenIcerModel>(json);
+
+            txtInputGrammar.Text = model.InputGrammar;
+            txtInputTest.Text = model.InputTest;
+        }
+        #endregion
     }
 }

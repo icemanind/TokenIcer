@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using TokenIcer.Languages;
 
 namespace TokenIcer
 {

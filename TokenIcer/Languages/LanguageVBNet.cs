@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 
-namespace TokenIcer
+namespace TokenIcer.Languages
 {
     public class LanguageVBNet : ITokenIcerLanguage
     {

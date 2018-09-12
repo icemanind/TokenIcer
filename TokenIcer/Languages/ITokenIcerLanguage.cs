@@ -1,4 +1,4 @@
-﻿namespace TokenIcer
+﻿namespace TokenIcer.Languages
 {
     public interface ITokenIcerLanguage
     {

@@ -36,6 +36,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.examplesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simpleBASICToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simpleCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtInputGrammar = new ScintillaNET.Scintilla();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,7 +47,9 @@
             this.tvOutput = new System.Windows.Forms.TreeView();
             this.btnTestGrammar = new System.Windows.Forms.Button();
             this.btnGenerateClass = new System.Windows.Forms.Button();
-            this.simpleCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +83,7 @@
             this.saveInputGrammarToolStripMenuItem.Name = "saveInputGrammarToolStripMenuItem";
             this.saveInputGrammarToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.saveInputGrammarToolStripMenuItem.Text = "Save Grammar and Test...";
+            this.saveInputGrammarToolStripMenuItem.Click += new System.EventHandler(this.SaveInputGrammarToolStripMenuItem_Click);
             // 
             // loadGrammarAndTestToolStripMenuItem
             // 
@@ -87,6 +91,7 @@
             this.loadGrammarAndTestToolStripMenuItem.Name = "loadGrammarAndTestToolStripMenuItem";
             this.loadGrammarAndTestToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.loadGrammarAndTestToolStripMenuItem.Text = "Load Grammar and Test...";
+            this.loadGrammarAndTestToolStripMenuItem.Click += new System.EventHandler(this.LoadGrammarAndTestToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -114,25 +119,33 @@
             // 
             this.simpleBASICToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.simpleBASICToolStripMenuItem.Name = "simpleBASICToolStripMenuItem";
-            this.simpleBASICToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.simpleBASICToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.simpleBASICToolStripMenuItem.Text = "Simple &BASIC";
             this.simpleBASICToolStripMenuItem.Click += new System.EventHandler(this.SimpleBASICToolStripMenuItem_Click);
+            // 
+            // simpleCToolStripMenuItem
+            // 
+            this.simpleCToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.simpleCToolStripMenuItem.Name = "simpleCToolStripMenuItem";
+            this.simpleCToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.simpleCToolStripMenuItem.Text = "Simple C";
+            this.simpleCToolStripMenuItem.Click += new System.EventHandler(this.simpleCToolStripMenuItem_Click);
             // 
             // txtInputGrammar
             // 
             this.txtInputGrammar.CaretForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.txtInputGrammar.FontQuality = ScintillaNET.FontQuality.LcdOptimized;
-            this.txtInputGrammar.Location = new System.Drawing.Point(15, 61);
+            this.txtInputGrammar.Location = new System.Drawing.Point(15, 114);
             this.txtInputGrammar.Name = "txtInputGrammar";
             this.txtInputGrammar.ScrollWidth = 1;
-            this.txtInputGrammar.Size = new System.Drawing.Size(553, 181);
+            this.txtInputGrammar.Size = new System.Drawing.Size(553, 250);
             this.txtInputGrammar.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.label1.Location = new System.Drawing.Point(16, 35);
+            this.label1.Location = new System.Drawing.Point(16, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(552, 23);
             this.label1.TabIndex = 2;
@@ -143,7 +156,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.label2.Location = new System.Drawing.Point(11, 246);
+            this.label2.Location = new System.Drawing.Point(11, 370);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(557, 23);
             this.label2.TabIndex = 3;
@@ -154,17 +167,17 @@
             // 
             this.txtInputTest.CaretForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.txtInputTest.FontQuality = ScintillaNET.FontQuality.LcdOptimized;
-            this.txtInputTest.Location = new System.Drawing.Point(15, 272);
+            this.txtInputTest.Location = new System.Drawing.Point(15, 398);
             this.txtInputTest.Name = "txtInputTest";
             this.txtInputTest.ScrollWidth = 1;
-            this.txtInputTest.Size = new System.Drawing.Size(553, 181);
+            this.txtInputTest.Size = new System.Drawing.Size(553, 250);
             this.txtInputTest.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.label3.Location = new System.Drawing.Point(580, 35);
+            this.label3.Location = new System.Drawing.Point(580, 88);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(546, 23);
             this.label3.TabIndex = 5;
@@ -175,11 +188,11 @@
             // 
             this.txtOutput.CaretForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.txtOutput.FontQuality = ScintillaNET.FontQuality.LcdOptimized;
-            this.txtOutput.Location = new System.Drawing.Point(582, 61);
+            this.txtOutput.Location = new System.Drawing.Point(582, 114);
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ReadOnly = true;
             this.txtOutput.ScrollWidth = 1;
-            this.txtOutput.Size = new System.Drawing.Size(544, 181);
+            this.txtOutput.Size = new System.Drawing.Size(544, 250);
             this.txtOutput.TabIndex = 6;
             this.txtOutput.WrapMode = ScintillaNET.WrapMode.Whitespace;
             // 
@@ -187,7 +200,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.label4.Location = new System.Drawing.Point(580, 246);
+            this.label4.Location = new System.Drawing.Point(580, 370);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(546, 23);
             this.label4.TabIndex = 7;
@@ -198,16 +211,16 @@
             // 
             this.tvOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.tvOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.tvOutput.Location = new System.Drawing.Point(582, 272);
+            this.tvOutput.Location = new System.Drawing.Point(582, 398);
             this.tvOutput.Name = "tvOutput";
-            this.tvOutput.Size = new System.Drawing.Size(544, 181);
+            this.tvOutput.Size = new System.Drawing.Size(544, 250);
             this.tvOutput.TabIndex = 8;
             // 
             // btnTestGrammar
             // 
             this.btnTestGrammar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTestGrammar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.btnTestGrammar.Location = new System.Drawing.Point(228, 459);
+            this.btnTestGrammar.Location = new System.Drawing.Point(228, 661);
             this.btnTestGrammar.Name = "btnTestGrammar";
             this.btnTestGrammar.Size = new System.Drawing.Size(120, 43);
             this.btnTestGrammar.TabIndex = 9;
@@ -219,7 +232,7 @@
             // 
             this.btnGenerateClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.btnGenerateClass.Location = new System.Drawing.Point(791, 459);
+            this.btnGenerateClass.Location = new System.Drawing.Point(791, 661);
             this.btnGenerateClass.Name = "btnGenerateClass";
             this.btnGenerateClass.Size = new System.Drawing.Size(120, 43);
             this.btnGenerateClass.TabIndex = 10;
@@ -227,20 +240,38 @@
             this.btnGenerateClass.UseVisualStyleBackColor = true;
             this.btnGenerateClass.Click += new System.EventHandler(this.BtnGenerateClass_Click);
             // 
-            // simpleCToolStripMenuItem
+            // label5
             // 
-            this.simpleCToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.simpleCToolStripMenuItem.Name = "simpleCToolStripMenuItem";
-            this.simpleCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.simpleCToolStripMenuItem.Text = "Simple C";
-            this.simpleCToolStripMenuItem.Click += new System.EventHandler(this.simpleCToolStripMenuItem_Click);
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(97)))), ((int)(((byte)(97)))));
+            this.label5.Font = new System.Drawing.Font("Arial", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
+            this.label5.Location = new System.Drawing.Point(0, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(1142, 60);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "TokenIcer";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "tki";
+            this.saveFileDialog1.Filter = "TokenIcer files|*.tki|All Files|*.*";
+            this.saveFileDialog1.Title = "Save TokenIcer File";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "tki";
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "TokenIcer files|*.tki|All Files|*.*";
+            this.openFileDialog1.Title = "Open TokenIcer File";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.ClientSize = new System.Drawing.Size(1142, 517);
+            this.ClientSize = new System.Drawing.Size(1142, 718);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnGenerateClass);
             this.Controls.Add(this.btnTestGrammar);
             this.Controls.Add(this.tvOutput);
@@ -287,6 +318,9 @@
         private System.Windows.Forms.ToolStripMenuItem examplesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem simpleBASICToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem simpleCToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
