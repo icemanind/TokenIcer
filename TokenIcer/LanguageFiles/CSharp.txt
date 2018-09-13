@@ -112,8 +112,15 @@ namespace TokenIcer
 			// loop
             if (_index >= _inputString.Length)
                 return null;
-
-			// Iterate through our prepared matches/Tokens dictionary
+{IgnoreSpaces}
+            // Ignore Spaces
+            while (_inputString[_index] == ' ' || _inputString[_index] == '\t')
+            {
+                _index++;
+                if (_index >= _inputString.Length) return null;
+            }
+{/IgnoreSpaces}
+			   // Iterate through our prepared matches/Tokens dictionary
             foreach (KeyValuePair<Tokens, MatchCollection> pair in _regExMatchCollection)
             {
 			    // Iterate through each prepared match
@@ -167,6 +174,15 @@ namespace TokenIcer
                 _index = oldIndex;
                 return null;
             }
+
+{IgnoreSpaces}
+            // Ignore Spaces
+            while (_inputString[_index] == ' ' || _inputString[_index] == '\t')
+            {
+                _index++;
+                if (_index >= _inputString.Length) return null;
+            }
+{/IgnoreSpaces}
 
             foreach (KeyValuePair<Tokens, string> pair in _tokens)
             {

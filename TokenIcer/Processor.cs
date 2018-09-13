@@ -11,6 +11,8 @@ namespace TokenIcer
         private string _inputString;
         private int _index;
 
+        public bool IgnoreSpaces { private get; set; }
+
         public string InputString
         {
             set => _inputString = value;
@@ -21,6 +23,7 @@ namespace TokenIcer
             _tokens = new Dictionary<string, string>();
             _index = 0;
             _inputString = string.Empty;
+            IgnoreSpaces = false;
         }
 
         public void ResetProcessor()
@@ -83,8 +86,13 @@ namespace TokenIcer
 
         public Token GetToken()
         {
-            if (_index >= _inputString.Length)
-                return null;
+            if (_index >= _inputString.Length) return null;
+
+            while ((_inputString[_index] == ' ' || _inputString[_index] == '\t') && IgnoreSpaces)
+            {
+                _index++;
+                if (_index >= _inputString.Length) return null;
+            }
 
             foreach (KeyValuePair<string, string> pair in _tokens)
             {

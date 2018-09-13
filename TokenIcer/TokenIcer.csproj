@@ -78,6 +78,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token.cs" />
+    <Compile Include="TokenIcerCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TokenIcerModel.cs" />
     <EmbeddedResource Include="GenerateClassForm.resx">
       <DependentUpon>GenerateClassForm.cs</DependentUpon>

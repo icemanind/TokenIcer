@@ -50,6 +50,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.chkIgnoreSpaces = new TokenIcer.TokenIcerCheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -156,7 +157,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.label2.Location = new System.Drawing.Point(11, 370);
+            this.label2.Location = new System.Drawing.Point(13, 400);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(557, 23);
             this.label2.TabIndex = 3;
@@ -167,7 +168,7 @@
             // 
             this.txtInputTest.CaretForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.txtInputTest.FontQuality = ScintillaNET.FontQuality.LcdOptimized;
-            this.txtInputTest.Location = new System.Drawing.Point(15, 398);
+            this.txtInputTest.Location = new System.Drawing.Point(17, 428);
             this.txtInputTest.Name = "txtInputTest";
             this.txtInputTest.ScrollWidth = 1;
             this.txtInputTest.Size = new System.Drawing.Size(553, 250);
@@ -200,7 +201,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.label4.Location = new System.Drawing.Point(580, 370);
+            this.label4.Location = new System.Drawing.Point(582, 400);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(546, 23);
             this.label4.TabIndex = 7;
@@ -211,7 +212,7 @@
             // 
             this.tvOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.tvOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.tvOutput.Location = new System.Drawing.Point(582, 398);
+            this.tvOutput.Location = new System.Drawing.Point(584, 428);
             this.tvOutput.Name = "tvOutput";
             this.tvOutput.Size = new System.Drawing.Size(544, 250);
             this.tvOutput.TabIndex = 8;
@@ -220,7 +221,7 @@
             // 
             this.btnTestGrammar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTestGrammar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.btnTestGrammar.Location = new System.Drawing.Point(228, 661);
+            this.btnTestGrammar.Location = new System.Drawing.Point(230, 691);
             this.btnTestGrammar.Name = "btnTestGrammar";
             this.btnTestGrammar.Size = new System.Drawing.Size(120, 43);
             this.btnTestGrammar.TabIndex = 9;
@@ -232,7 +233,7 @@
             // 
             this.btnGenerateClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.btnGenerateClass.Location = new System.Drawing.Point(791, 661);
+            this.btnGenerateClass.Location = new System.Drawing.Point(793, 691);
             this.btnGenerateClass.Name = "btnGenerateClass";
             this.btnGenerateClass.Size = new System.Drawing.Size(120, 43);
             this.btnGenerateClass.TabIndex = 10;
@@ -265,12 +266,27 @@
             this.openFileDialog1.Filter = "TokenIcer files|*.tki|All Files|*.*";
             this.openFileDialog1.Title = "Open TokenIcer File";
             // 
+            // chkIgnoreSpaces
+            // 
+            this.chkIgnoreSpaces.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkIgnoreSpaces.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkIgnoreSpaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkIgnoreSpaces.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
+            this.chkIgnoreSpaces.Location = new System.Drawing.Point(24, 366);
+            this.chkIgnoreSpaces.Name = "chkIgnoreSpaces";
+            this.chkIgnoreSpaces.Size = new System.Drawing.Size(326, 26);
+            this.chkIgnoreSpaces.TabIndex = 12;
+            this.chkIgnoreSpaces.Text = "Ignore spaces and tabs (White Space)";
+            this.chkIgnoreSpaces.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkIgnoreSpaces.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.ClientSize = new System.Drawing.Size(1142, 718);
+            this.ClientSize = new System.Drawing.Size(1142, 757);
+            this.Controls.Add(this.chkIgnoreSpaces);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnGenerateClass);
             this.Controls.Add(this.btnTestGrammar);
@@ -321,6 +337,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private TokenIcerCheckBox chkIgnoreSpaces;
     }
 }
 

@@ -11,6 +11,8 @@ namespace TokenIcer
         private readonly Dictionary<string, string> _regExRules;
         private readonly Dictionary<string, string> _ruleComments;
 
+        public bool IgnoreSpaces { get; set; }
+
         public GenerateClassForm()
         {
             InitializeComponent();
@@ -72,6 +74,17 @@ namespace TokenIcer
                 string commentDelimiter = language.GetCommentIdentifier();
                 string commentXmlDelimiter = language.GetXmlCommentIdentifier();
                 int partNum = 1;
+
+                int ignoreSpacesStart = skeleton.IndexOf("{IgnoreSpaces", StringComparison.Ordinal);
+                
+                while (ignoreSpacesStart >= 0)
+                {
+                    int ignoreSpacesEnd = skeleton.IndexOf("{/IgnoreSpaces}", ignoreSpacesStart, StringComparison.Ordinal);
+                    skeleton = !IgnoreSpaces
+                        ? skeleton.Remove(ignoreSpacesStart, ignoreSpacesEnd - ignoreSpacesStart + 15)
+                        : skeleton.Replace("{IgnoreSpaces}", "").Replace("{/IgnoreSpaces}", "");
+                    ignoreSpacesStart = skeleton.IndexOf("{IgnoreSpaces", StringComparison.Ordinal);
+                }
 
                 foreach (string line in Regex.Split(skeleton, carriageReturn))
                 {

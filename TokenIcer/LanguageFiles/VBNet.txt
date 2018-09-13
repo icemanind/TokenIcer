@@ -103,7 +103,14 @@ Namespace TokenIcer
             If _index >= _inputString.Length Then
                 Return Nothing
             End If
-			
+
+{IgnoreSpaces}
+            ' Ignore Spaces
+            While _inputString(_index) = " "c OrElse _inputString(_index) = vbTab
+                _index += 1
+                If _index >= _inputString.Length Then Return Nothing
+            End While
+{/IgnoreSpaces}			
 			' Iterate through our prepared matches/Tokens dictionary
 			For Each pair As KeyValuePair(Of Tokens, MatchCollection) In _regExMatchCollection
 				' Iterate through each prepared match
@@ -150,6 +157,14 @@ Namespace TokenIcer
                 _index = oldIndex
                 Return Nothing
             End If
+
+{IgnoreSpaces}
+            ' Ignore Spaces
+            While _inputString(_index) = " "c OrElse _inputString(_index) = vbTab
+                _index += 1
+                If _index >= _inputString.Length Then Return Nothing
+            End While
+{/IgnoreSpaces}	
 
             For Each pair As KeyValuePair(Of Tokens, String) In _tokens
                 Dim r As New Regex(pair.Value)

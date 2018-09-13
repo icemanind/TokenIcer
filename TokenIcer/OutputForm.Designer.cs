@@ -39,7 +39,7 @@
             this.txtOutput.Location = new System.Drawing.Point(0, 0);
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollWidth = 1;
-            this.txtOutput.Size = new System.Drawing.Size(800, 450);
+            this.txtOutput.Size = new System.Drawing.Size(1397, 878);
             this.txtOutput.TabIndex = 2;
             // 
             // OutputForm
@@ -47,7 +47,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1397, 878);
             this.Controls.Add(this.txtOutput);
             this.MinimizeBox = false;
             this.Name = "OutputForm";

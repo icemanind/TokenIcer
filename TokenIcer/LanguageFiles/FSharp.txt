@@ -35,7 +35,7 @@ type TokenParser() =
         let _inputString = String.Empty
         _regExMatchCollection.Clear()
 
-    member this.GetToken() : Token option  =
+    member this.GetToken() : Token option  ={IgnoreSpaces}{/IgnoreSpaces}
         if _index >= _inputString.Length then None
         else 
             let mutable res : Token option = None                    

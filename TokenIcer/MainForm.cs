@@ -112,6 +112,7 @@ namespace TokenIcer
         private void BtnTestGrammar_Click(object sender, EventArgs e)
         {
             _processor.InputString = txtInputTest.Text;
+            _processor.IgnoreSpaces = chkIgnoreSpaces.Checked;
 
             txtOutput.ReadOnly = false;
             txtOutput.Text = string.Empty;
@@ -190,7 +191,7 @@ namespace TokenIcer
 
         private void BtnGenerateClass_Click(object sender, EventArgs e)
         {
-            var form = new GenerateClassForm();
+            var form = new GenerateClassForm {IgnoreSpaces = chkIgnoreSpaces.Checked};
 
             foreach (var line in txtInputGrammar.Lines)
             {
@@ -263,9 +264,11 @@ namespace TokenIcer
             string code = GetExampleCode("TokenIcer.Examples.SimpleBASIC.txt");
             string grammar = code.Split('~')[0];
             string test = code.Split('~')[1];
+            bool ignoreSpaces = bool.Parse(code.Split('~')[2]);
 
             txtInputGrammar.Text = grammar;
             txtInputTest.Text = test;
+            chkIgnoreSpaces.Checked = ignoreSpaces;
         }
 
         private void simpleCToolStripMenuItem_Click(object sender, EventArgs e)
@@ -273,9 +276,11 @@ namespace TokenIcer
             string code = GetExampleCode("TokenIcer.Examples.SimpleC.txt");
             string grammar = code.Split('~')[0];
             string test = code.Split('~')[1];
+            bool ignoreSpaces = bool.Parse(code.Split('~')[2]);
 
             txtInputGrammar.Text = grammar;
             txtInputTest.Text = test;
+            chkIgnoreSpaces.Checked = ignoreSpaces;
         }
 
         private void SaveInputGrammarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -313,6 +318,7 @@ namespace TokenIcer
 
             txtInputGrammar.Text = model.InputGrammar;
             txtInputTest.Text = model.InputTest;
+            chkIgnoreSpaces.Checked = model.IgnoreSpaces;
         }
         #endregion
     }
