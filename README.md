@@ -1,7 +1,7 @@
 # TokenIcer
 A program for creating a tokenizer in C# or VB.Net
 
-#### Introduction
+### Introduction
 A tokenizer is a tool in which you feed input into it and your input get's "tokenized" and the tokenizer spits out 
 "tokenized" output.
 
@@ -15,12 +15,12 @@ Feeding this input into a tokenizer should produce output like this:
 {Integer}{Whitespace}{Plus}{Whitespace}{Integer}{RightParen}{Newline}
 ```
 
-#### So what exactly does TokenIcer do?
+### So what exactly does TokenIcer do?
 TokenIcer is a code generator. It generates a class file in either C# or VB.Net and this class file can be added to your 
 solution. This class file will take an input string and parse it down to tokens. These tokens can then be used by
 your main application to pretty much do anything, from building a simple calculator to building your own compiler!
 
-#### Using TokenIcer
+### Using TokenIcer
 After running TokenIcer, you will see four boxes, marked "Input Grammar", "Input Test", "Output", and "Output Tree". 
 The first thing you'll want to do is create your input grammar. The input grammar is simply a list of rules that
 TokenIcer uses to parse your test input. These rules are simply RegEx expressions, surrounded in quotes, followed by
@@ -72,7 +72,7 @@ will bring up a dialog box where you can select your desired output language (C#
 include comments and/or XML comments in the final code. Once you select your options and language, click on "Generate my class"
 and a window will popup with your code. You can create a class in your project and include this code.
 
-#### Using The Generated Class
+### Using The Generated Class
 Once you include the class in your project, you can now use it to parse strings. Here is an example of how you can use
 the token parser:
 
