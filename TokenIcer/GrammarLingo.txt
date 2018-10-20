@@ -1,0 +1,7 @@
+﻿"\`[A-Za-z0-9_]+\`" TokenIndentifier
+"[A-Za-z0-9_]+\:" Identifier
+"\(" LeftParen
+"\)" RightParen
+"\|" Or
+"\?" Optional
+"[\n\r]+" Newline

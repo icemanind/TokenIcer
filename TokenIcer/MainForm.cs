@@ -57,17 +57,19 @@ namespace TokenIcer
 
         private void ProcessTestInput()
         {
-            var token = _processor.GetToken();
+            var token = _processor.GetGrammarToken();
 
-            while (token != null)
-            {
-                txtOutput.ReadOnly = false;
-                txtOutput.Text = txtOutput.Text + @"{" + token.TokenName + @"} ";
-                txtOutput.ReadOnly = true;
-                UpdateTree(token);
+            //var token = _processor.GetToken();
 
-                token = _processor.GetToken();
-            }
+            //while (token != null)
+            //{
+            //    txtOutput.ReadOnly = false;
+            //    txtOutput.Text = txtOutput.Text + @"{" + token.TokenName + @"} ";
+            //    txtOutput.ReadOnly = true;
+            //    UpdateTree(token);
+
+            //    token = _processor.GetToken();
+            //}
         }
 
         private string GetExampleCode(string name)
@@ -122,66 +124,95 @@ namespace TokenIcer
             {
                 if ((line.Text.Trim().Equals(string.Empty)) || (line.Text.Trim().StartsWith("#")))
                     continue;
-                string regex = string.Empty;
-                char prevChar = '\0';
-                char prevPrevChar = '\0';
-                int quoteNum = 0;
-
-                int ndx = 0;
-
-                foreach (char c in line.Text)
+                if (line.Text.Trim().StartsWith("\""))
                 {
-                    if (c == '\"')
-                    {
-                        quoteNum++;
+                    string regex = string.Empty;
+                    char prevChar = '\0';
+                    char prevPrevChar = '\0';
+                    int quoteNum = 0;
 
-                        if (quoteNum > 1 && prevChar == '\\' && prevPrevChar == '\\')
+                    int ndx = 0;
+
+                    foreach (char c in line.Text.Trim())
+                    {
+                        if (c == '\"')
                         {
-                            regex += c;
-                            ndx++;
-                            break;
+                            quoteNum++;
+
+                            if (quoteNum > 1 && prevChar == '\\' && prevPrevChar == '\\')
+                            {
+                                regex += c;
+                                ndx++;
+                                break;
+                            }
+
+                            if (quoteNum > 1 && prevChar != '\\')
+                            {
+                                regex += c;
+                                ndx++;
+                                break;
+                            }
                         }
-                        if (quoteNum > 1 && prevChar != '\\')
-                        {
-                            regex += c;
-                            ndx++;
-                            break;
-                        }
+
+                        regex += c;
+                        ndx++;
+                        prevPrevChar = prevChar;
+                        prevChar = c;
                     }
 
-                    regex += c;
-                    ndx++;
-                    prevPrevChar = prevChar;
-                    prevChar = c;
+                    string ident = line.Text.Trim().Remove(0, ndx).Trim();
+
+                    int ndxComment = ident.Length - 1;
+
+                    while (ndxComment > 0)
+                    {
+                        if (ident[ndxComment] == '#')
+                            break;
+                        ndxComment--;
+                    }
+
+                    if (ndxComment > 0)
+                    {
+                        ident = ident.Substring(0, ndxComment);
+                        ident = ident.Trim();
+                    }
+
+                    regex = regex.Substring(1, regex.Length - 1);
+                    regex = regex.Substring(0, regex.Length - 1);
+                    regex = regex.Replace("\\\"", "\"");
+
+                    if (regex.Equals(string.Empty))
+                        continue;
+
+                    string retval = _processor.AddRegExToken(regex, ident);
+                    if (retval != string.Empty)
+                    {
+                        MessageBox.Show(retval, @"Error!");
+                        return;
+                    }
                 }
-                string ident = line.Text.Remove(0, ndx).Trim();
-
-                int ndxComment = ident.Length - 1;
-
-                while (ndxComment > 0)
+                else
                 {
-                    if (ident[ndxComment] == '#')
-                        break;
-                    ndxComment--;
-                }
-                if (ndxComment > 0)
-                {
-                    ident = ident.Substring(0, ndxComment);
-                    ident = ident.Trim();
-                }
+                    var p = new GrammarParser();
+                    p.InputString = line.Text.Trim();
 
-                regex = regex.Substring(1, regex.Length - 1);
-                regex = regex.Substring(0, regex.Length - 1);
-                regex = regex.Replace("\\\"", "\"");
+                    GrammarParser.Token t = p.GetToken();
+                    string rule = "";
+                    string identifier = "";
 
-                if (regex.Equals(string.Empty))
-                    continue;
+                    while (t != null)
+                    {
+                        if (t.TokenName == GrammarParser.Tokens.Identifier)
+                        {
+                            identifier = t.TokenValue.TrimEnd(':');
+                            t = p.GetToken();
+                            continue;
+                        }
+                        rule = rule + t.TokenValue;
+                        t = p.GetToken();
+                    }
 
-                string retval = _processor.AddRegExToken(regex, ident);
-                if (retval != string.Empty)
-                {
-                    MessageBox.Show(retval, "Error!");
-                    return;
+                    _processor.AddGrammar(rule, identifier);
                 }
             }
 

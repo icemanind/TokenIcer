@@ -58,6 +58,8 @@
     <Compile Include="GenerateClassForm.Designer.cs">
       <DependentUpon>GenerateClassForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GrammarParser.cs" />
+    <Compile Include="GrammarToken.cs" />
     <Compile Include="Languages\ITokenIcerLanguage.cs" />
     <Compile Include="Languages\LanguageCSharp.cs" />
     <Compile Include="Languages\LanguageFSharp.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="OutputForm.Designer.cs">
       <DependentUpon>OutputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PeekToken.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Examples\SimpleC.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GrammarLingo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
