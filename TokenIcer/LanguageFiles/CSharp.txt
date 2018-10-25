@@ -5,17 +5,17 @@ using System.Text.RegularExpressions;
 namespace TokenIcer
 {
 	/// <summary>
-	/// TokenParser
+	/// {ClassNamePrefix}TokenParser
 	/// </summary>
 	/// <remarks>
-	/// TokenParser is the main parser engine for converting input into lexical tokens.
+	/// {ClassNamePrefix}TokenParser is the main parser engine for converting input into lexical tokens.
 	/// </remarks>
-    public partial class TokenParser
+    public class {ClassNamePrefix}TokenParser
     {
         // This dictionary will store our RegEx rules
-        protected readonly Dictionary<Tokens, string> _tokens;
+        private readonly Dictionary<Tokens, string> _tokens;
         // This dictionary will store our matches
-        protected readonly Dictionary<Tokens, MatchCollection> _regExMatchCollection;
+        private readonly Dictionary<Tokens, MatchCollection> _regExMatchCollection;
         // This input string will store the string to parse
         private string _inputString;
         // This index is used internally so the parser knows where it left off
@@ -54,7 +54,7 @@ namespace TokenIcer
 		/// <remarks>
 		/// The constructor initalizes memory and adds all of the tokens to the token dictionary.
 		/// </remarks>
-        public TokenParser()
+        public {ClassNamePrefix}TokenParser()
         {
             _tokens = new Dictionary<Tokens, string>();
             _regExMatchCollection = new Dictionary<Tokens, MatchCollection>();
@@ -83,7 +83,7 @@ namespace TokenIcer
 		/// <summary>
 		/// ResetParser resets the parser to its inital state. Reloading InputString is required.
 		/// </summary>
-		/// <seealso cref="InputString">
+		/// <seealso cref="InputString" />
         public virtual void ResetParser()
         {
             _index = 0;
@@ -150,7 +150,7 @@ namespace TokenIcer
 		/// <summary>
 		/// Returns the next token that GetToken() will return.
 		/// </summary>
-		/// <seealso cref="Peek(PeekToken)">
+		/// <seealso cref="Peek(PeekToken)" />
         public virtual PeekToken Peek()
         {
             return Peek(new PeekToken(_index, new Token(Tokens.Undefined, string.Empty)));
@@ -162,7 +162,7 @@ namespace TokenIcer
 		/// Returns the next token after the Token passed here
 		/// </summary>
 		/// <param name="peekToken">The PeekToken token returned from a previous Peek() call</param>
-		/// <seealso cref="Peek()">
+		/// <seealso cref="Peek()" />
         public virtual PeekToken Peek(PeekToken peekToken)
         {
             int oldIndex = _index;
@@ -201,46 +201,46 @@ namespace TokenIcer
             _index = oldIndex;
             return pt2;
         }
-    }
 
-    // This defines the PeekToken object
-	/// <summary>
-	/// A PeekToken object class
-	/// </summary>
-	/// <remarks>
-	/// A PeekToken is a special pointer object that can be used to Peek() several
-	/// tokens ahead in the GetToken() queue.
-	/// </remarks>
-    public partial class PeekToken
-    {
-        public int TokenIndex { get; set; }
+       // This defines the PeekToken object
+	   /// <summary>
+	   /// A PeekToken object class
+	   /// </summary>
+	   /// <remarks>
+	   /// A PeekToken is a special pointer object that can be used to Peek() several
+	   /// tokens ahead in the GetToken() queue.
+	   /// </remarks>
+       public partial class PeekToken
+       {
+           public int TokenIndex { get; set; }
 
-        public Token TokenPeek { get; set; }
+           public Token TokenPeek { get; set; }
 
-        public PeekToken(int index, Token value)
-        {
-            TokenIndex = index;
-            TokenPeek = value;
-        }
-    }
+           public PeekToken(int index, Token value)
+           {
+               TokenIndex = index;
+               TokenPeek = value;
+           }
+       }
 
-    // This defines the Token object
-	/// <summary>
-	/// a Token object class
-	/// </summary>
-	/// <remarks>
-	/// A Token object holds the token and token value.
-	/// </remarks>
-    public partial class Token
-    {
-        public TokenParser.Tokens TokenName { get; set; }
+       // This defines the Token object
+	   /// <summary>
+	   /// a Token object class
+	   /// </summary>
+	   /// <remarks>
+	   /// A Token object holds the token and token value.
+	   /// </remarks>
+       public class Token
+       {
+           public Tokens TokenName { get; set; }
 
-        public string TokenValue { get; set; }
+           public string TokenValue { get; set; }
 
-        public Token(TokenParser.Tokens name, string value)
-        {
-            TokenName = name;
-            TokenValue = value;
-        }
+           public Token(Tokens name, string value)
+           {
+               TokenName = name;
+               TokenValue = value;
+           }
+       }
     }
 }

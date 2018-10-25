@@ -4,12 +4,12 @@ Imports System.Text.RegularExpressions
 
 Namespace TokenIcer
 	''' <summary>
-	''' TokenParser
+	''' {ClassNamePrefix}TokenParser
 	''' </summary>
 	''' <remarks>
-	''' TokenParser is the main parser engine for converting input into lexical tokens.
+	''' {ClassNamePrefix}TokenParser is the main parser engine for converting input into lexical tokens.
 	''' </remarks>
-    Public Partial Class TokenParser
+    Public Class {ClassNamePrefix}TokenParser
         ' This dictionary will store our RegEx rules
         Protected ReadOnly _tokens As Dictionary(Of Tokens, String)
         ' This dictionary will store our matches
@@ -75,7 +75,7 @@ Namespace TokenIcer
 		''' <summary>
 		''' ResetParser resets the parser to its inital state. Reloading InputString is required.
 		''' </summary>
-		''' <seealso cref="InputString">
+		''' <seealso cref="InputString" />
         Public Overridable Sub ResetParser()
             _index = 0
             _inputString = String.Empty
@@ -136,7 +136,7 @@ Namespace TokenIcer
 		''' <summary>
 		''' Returns the next token that GetToken() will return.
 		''' </summary>
-		''' <seealso cref="Peek(PeekToken)">
+		''' <seealso cref="Peek(PeekToken)" />
         Public Overridable Function Peek() As PeekToken
             Return Peek(New PeekToken(_index, New Token(Tokens.Undefined, String.Empty)))
         End Function
@@ -147,7 +147,7 @@ Namespace TokenIcer
 		''' Returns the next token after the Token passed here
 		''' </summary>
 		''' <param name="peekToken">The PeekToken token returned from a previous Peek() call</param>
-		''' <seealso cref="Peek()">
+		''' <seealso cref="Peek()" />
         Public Overridable Function Peek(peekToken As PeekToken) As PeekToken
             Dim oldIndex As Integer = _index
 
@@ -181,74 +181,76 @@ Namespace TokenIcer
             _index = oldIndex
             return pt2
         End Function
+
+       ' This defines the PeekToken object
+	    ''' <summary>
+	    ''' A PeekToken object class
+	    ''' </summary>
+	    ''' <remarks>
+	    ''' A PeekToken is a special pointer object that can be used to Peek() several
+	    ''' tokens ahead in the GetToken() queue.
+	    ''' </remarks>
+       Public Class PeekToken
+           Public Property TokenIndex() As Integer
+               Get
+                   Return m_TokenIndex
+               End Get
+               Set
+                   m_TokenIndex = Value
+               End Set
+           End Property
+           Private m_TokenIndex As Integer
+
+           Public Property TokenPeek() As Token
+               Get
+                   Return m_TokenPeek
+               End Get
+               Set
+                   m_TokenPeek = Value
+               End Set
+           End Property
+           Private m_TokenPeek As Token
+
+           Public Sub New(index As Integer, value As Token)
+               TokenIndex = index
+               TokenPeek = value
+           End Sub
+       End Class
+
+      ' This defines the Token object
+	   ''' <summary>
+	   ''' a Token object class
+	   ''' </summary>
+	   ''' <remarks>
+	   ''' A Token object holds the token and token value.
+	   ''' </remarks>
+         Public Class Token
+            Public Property TokenName() As {ClassNamePrefix}TokenParser.Tokens
+               Get
+                     Return m_TokenName
+               End Get
+               Set
+                     m_TokenName = Value
+               End Set
+            End Property
+            Private m_TokenName As {ClassNamePrefix}TokenParser.Tokens
+
+            Public Property TokenValue() As String
+               Get
+                     Return m_TokenValue
+               End Get
+               Set
+                     m_TokenValue = Value
+               End Set
+            End Property
+            Private m_TokenValue As String
+
+            Public Sub New(name As {ClassNamePrefix}TokenParser.Tokens, value As String)
+               TokenName = name
+               TokenValue = value
+            End Sub
+         End Class
     End Class
 
-    ' This defines the PeekToken object
-	''' <summary>
-	''' A PeekToken object class
-	''' </summary>
-	''' <remarks>
-	''' A PeekToken is a special pointer object that can be used to Peek() several
-	''' tokens ahead in the GetToken() queue.
-	''' </remarks>
-    Public Partial Class PeekToken
-        Public Property TokenIndex() As Integer
-            Get
-                Return m_TokenIndex
-            End Get
-            Set
-                m_TokenIndex = Value
-            End Set
-        End Property
-        Private m_TokenIndex As Integer
 
-        Public Property TokenPeek() As Token
-            Get
-                Return m_TokenPeek
-            End Get
-            Set
-                m_TokenPeek = Value
-            End Set
-        End Property
-        Private m_TokenPeek As Token
-
-        Public Sub New(index As Integer, value As Token)
-            TokenIndex = index
-            TokenPeek = value
-        End Sub
-    End Class
-
-    ' This defines the Token object
-	''' <summary>
-	''' a Token object class
-	''' </summary>
-	''' <remarks>
-	''' A Token object holds the token and token value.
-	''' </remarks>
-    Public Partial Class Token
-        Public Property TokenName() As TokenParser.Tokens
-            Get
-                Return m_TokenName
-            End Get
-            Set
-                m_TokenName = Value
-            End Set
-        End Property
-        Private m_TokenName As TokenParser.Tokens
-
-        Public Property TokenValue() As String
-            Get
-                Return m_TokenValue
-            End Get
-            Set
-                m_TokenValue = Value
-            End Set
-        End Property
-        Private m_TokenValue As String
-
-        Public Sub New(name As TokenParser.Tokens, value As String)
-            TokenName = name
-            TokenValue = value
-        End Sub
-    End Class
 End Namespace

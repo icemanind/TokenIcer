@@ -12,6 +12,7 @@ namespace TokenIcer
         private readonly Dictionary<string, string> _ruleComments;
 
         public bool IgnoreSpaces { get; set; }
+        public string ClassName { get; set; }
 
         public GenerateClassForm()
         {
@@ -85,6 +86,8 @@ namespace TokenIcer
                         : skeleton.Replace("{IgnoreSpaces}", "").Replace("{/IgnoreSpaces}", "");
                     ignoreSpacesStart = skeleton.IndexOf("{IgnoreSpaces", StringComparison.Ordinal);
                 }
+
+                skeleton = skeleton.Replace("{ClassNamePrefix}", string.IsNullOrWhiteSpace(ClassName) ? "Unnamed" : ClassName);
 
                 foreach (string line in Regex.Split(skeleton, carriageReturn))
                 {

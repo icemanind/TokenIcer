@@ -191,7 +191,11 @@ namespace TokenIcer
 
         private void BtnGenerateClass_Click(object sender, EventArgs e)
         {
-            var form = new GenerateClassForm {IgnoreSpaces = chkIgnoreSpaces.Checked};
+            var form = new GenerateClassForm
+            {
+                IgnoreSpaces = chkIgnoreSpaces.Checked,
+                ClassName = txtClassNamePrefix.Text
+            };
 
             foreach (var line in txtInputGrammar.Lines)
             {
@@ -259,28 +263,28 @@ namespace TokenIcer
             form.ShowDialog();
         }
 
-        private void SimpleBASICToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadExample(string name)
         {
-            string code = GetExampleCode("TokenIcer.Examples.SimpleBASIC.txt");
+            string code = GetExampleCode(name);
             string grammar = code.Split('~')[0];
             string test = code.Split('~')[1];
             bool ignoreSpaces = bool.Parse(code.Split('~')[2]);
+            string className = code.Split('~')[3];
 
             txtInputGrammar.Text = grammar;
             txtInputTest.Text = test;
             chkIgnoreSpaces.Checked = ignoreSpaces;
+            txtClassNamePrefix.Text = className;
+        }
+
+        private void SimpleBASICToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadExample("TokenIcer.Examples.SimpleBASIC.txt");
         }
 
         private void simpleCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string code = GetExampleCode("TokenIcer.Examples.SimpleC.txt");
-            string grammar = code.Split('~')[0];
-            string test = code.Split('~')[1];
-            bool ignoreSpaces = bool.Parse(code.Split('~')[2]);
-
-            txtInputGrammar.Text = grammar;
-            txtInputTest.Text = test;
-            chkIgnoreSpaces.Checked = ignoreSpaces;
+            LoadExample("TokenIcer.Examples.SimpleC.txt");
         }
 
         private void SaveInputGrammarToolStripMenuItem_Click(object sender, EventArgs e)

@@ -28,6 +28,7 @@
       /// </summary>
       private void InitializeComponent()
       {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveInputGrammarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +51,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtClassNamePrefix = new System.Windows.Forms.TextBox();
             this.chkIgnoreSpaces = new TokenIcer.TokenIcerCheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -233,7 +236,7 @@
             // 
             this.btnGenerateClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.btnGenerateClass.Location = new System.Drawing.Point(793, 691);
+            this.btnGenerateClass.Location = new System.Drawing.Point(974, 692);
             this.btnGenerateClass.Name = "btnGenerateClass";
             this.btnGenerateClass.Size = new System.Drawing.Size(120, 43);
             this.btnGenerateClass.TabIndex = 10;
@@ -266,6 +269,26 @@
             this.openFileDialog1.Filter = "TokenIcer files|*.tki|All Files|*.*";
             this.openFileDialog1.Title = "Open TokenIcer File";
             // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
+            this.label6.Location = new System.Drawing.Point(633, 702);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(150, 23);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Class Name Prefix:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtClassNamePrefix
+            // 
+            this.txtClassNamePrefix.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtClassNamePrefix.Location = new System.Drawing.Point(777, 701);
+            this.txtClassNamePrefix.Name = "txtClassNamePrefix";
+            this.txtClassNamePrefix.Size = new System.Drawing.Size(187, 26);
+            this.txtClassNamePrefix.TabIndex = 14;
+            this.txtClassNamePrefix.Text = "Unnamed";
+            // 
             // chkIgnoreSpaces
             // 
             this.chkIgnoreSpaces.Appearance = System.Windows.Forms.Appearance.Button;
@@ -286,6 +309,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.ClientSize = new System.Drawing.Size(1142, 757);
+            this.Controls.Add(this.txtClassNamePrefix);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.chkIgnoreSpaces);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnGenerateClass);
@@ -301,6 +326,7 @@
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainForm";
@@ -338,6 +364,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private TokenIcerCheckBox chkIgnoreSpaces;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtClassNamePrefix;
     }
 }
 
